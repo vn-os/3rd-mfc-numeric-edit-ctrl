@@ -1,0 +1,1 @@
+MFC Numeric Edit Control @ https://github.com/datasynergyuk/CNumericEditControl.git
