@@ -59,7 +59,7 @@ IMPLEMENT_DYNAMIC(CNumericEditControl, CEdit)
 CNumericEditControl::CNumericEditControl()
 {
 	m_llInitialValue = VALUEINVALID;
-	m_modeEx = EDisplayMode::DISPLAY_DEC;
+	m_modeEx = EDisplayMode::DISPLAY_HEX;
 }
 
 CNumericEditControl::CNumericEditControl(EDisplayMode mode)
@@ -101,6 +101,11 @@ void CNumericEditControl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 	GetWindowText(sValue);
 	int nValueLength = sValue.GetLength();
 
+	if (nValueLength == 0 && (nChar == '-' || nChar == '+'))
+	{
+		bAllowed = true;
+	}
+
 	//Backspace always permitted
 	if (nChar == VK_BACK)
 		bAllowed = true;
@@ -125,7 +130,7 @@ void CNumericEditControl::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
 			bAllowed = false;
 
 		//x and X permitted in hex mode for "0x" but only for second character
-		else if (nValueLength == 1 && (nChar == 'x' || nChar == 'X'))
+		else if ((nValueLength == 1 || nValueLength == 2) && (nChar == 'x' || nChar == 'X'))
 			bAllowed = true;
 
 		//0-9 otherwise always permitted
