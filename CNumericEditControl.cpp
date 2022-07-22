@@ -42,7 +42,7 @@
 	SOFTWARE.
 */
 
-#include "stdafx.h"
+#include "pch.h"
 #include "CNumericEditControl.h"
 
 // CNumericEditControl
